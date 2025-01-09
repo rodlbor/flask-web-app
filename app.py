@@ -5,11 +5,11 @@ import os
 app = Flask(__name__)
 
 def fetch_latest_news():
-    api_key = os.getenv('NEWS_API_KEY')  # Get API key from environment variable
-    url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey=8a11b1002cf6437299befc225e850158"
+    api_key = '46b2085e855839b26e5de5f3d7d4a713'  # Your API key
+    url = f"http://api.mediastack.com/v1/news?access_key={api_key}&countries=ar&limit=5&sort=published_desc"
     response = requests.get(url)
     data = response.json()
-    return data['articles'][:5]  # Get top 5 articles
+    return data['data']  # Adjusted based on mediastack's response structure
 
 @app.route('/')
 def home():
@@ -18,3 +18,4 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
