@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RodboR Noticias</title>
+    <title>Latest News</title>
     <style>
         body {
             font-family: 'Georgia', serif;
@@ -76,26 +76,25 @@
 <body>
 
 <header>
-    <h1>Últimas noticias de Argentina</h1>
-    <p>Quédate informado con las últimas actualizaciones de Argentina.</p>
+    <h1>Today's Top News</h1>
+    <p>Stay informed with the latest updates from around the world.</p>
 </header>
 
 <div class="container">
     {% for article in news %}
         <div class="news-item">
-            <img src="{{ article.urlToImage or 'https://via.placeholder.com/300x200' }}" alt="Imagen de noticia">
+            <img src="{{ article.urlToImage }}" alt="News Image">
             <div class="content">
                 <h2><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
-                <p>{{ article.description or 'No description available.' }}</p>
+                <p>{{ article.description }}</p>
             </div>
         </div>
     {% endfor %}
 </div>
 
 <footer>
-    <p>&copy; 2025 RodboR News - Todos los derechos reservados</p>
+    <p>&copy; 2025 RodboR News - All Rights Reserved</p>
 </footer>
 
 </body>
 </html>
-
