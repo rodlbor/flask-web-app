@@ -1,5 +1,3 @@
-# rodbor 112323
-
 from flask import Flask, render_template
 import requests
 import os
@@ -8,10 +6,16 @@ app = Flask(__name__)
 
 def fetch_latest_news():
     api_key = os.getenv('NEWS_API_KEY')  # Get API key from environment variable
-    url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey=8a11b1002cf6437299befc225e850158"
+    url = f"https://newsapi.org/v2/top-headlines?country=ar&language=es&apiKey=8a11b1002cf6437299befc225e850158"
     response = requests.get(url)
     data = response.json()
-    return data['articles'][:5]  # Get top 5 articles
+    articles = data['articles'][:5]  # Get top 5 articles
+
+    # Change the source name to "RodboR News"
+    for article in articles:
+        article['source']['name'] = 'RodboR News'
+    
+    return articles
 
 @app.route('/')
 def home():
