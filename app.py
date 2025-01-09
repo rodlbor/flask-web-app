@@ -4,12 +4,16 @@ import os
 
 app = Flask(__name__)
 
+# Fetch latest news from Argentina in Spanish
 def fetch_latest_news():
-    api_key = os.getenv('NEWS_API_KEY')  # Get API key from environment variable
-    url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey=8a11b1002cf6437299befc225e850158"
+    api_key = os.getenv('NEWS_API_KEY')  # Get the API key from the environment
+    url = f"https://newsapi.org/v2/top-headlines?country=ar&language=es&apiKey={api_key}"  # Argentina news in Spanish
     response = requests.get(url)
-    data = response.json()
-    return data['articles'][:5]  # Get top 5 articles
+    if response.status_code == 200:
+        data = response.json()
+        return data.get('articles', [])  # Return the articles if available
+    else:
+        return []
 
 @app.route('/')
 def home():
@@ -18,3 +22,4 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
