@@ -83,10 +83,10 @@
 <div class="container">
     {% for article in news %}
         <div class="news-item">
-            <img src="{{ article.urlToImage }}" alt="Imagen de noticia">
+            <img src="{{ article.urlToImage or 'https://via.placeholder.com/300x200' }}" alt="Imagen de noticia">
             <div class="content">
                 <h2><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
-                <p>{{ article.description }}</p>
+                <p>{{ article.description or 'No description available.' }}</p>
             </div>
         </div>
     {% endfor %}

@@ -6,13 +6,14 @@ app = Flask(__name__)
 
 # Fetch latest news from Argentina in Spanish
 def fetch_latest_news():
-    api_key = os.getenv('NEWS_API_KEY')  # Get the API key from the environment
+    api_key = "8a11b1002cf6437299befc225e850158"  # Replace with your API key
     url = f"https://newsapi.org/v2/top-headlines?country=ar&language=es&apiKey={api_key}"  # Argentina news in Spanish
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
         return data.get('articles', [])  # Return the articles if available
     else:
+        print("Error fetching news:", response.status_code, response.text)
         return []
 
 @app.route('/')
